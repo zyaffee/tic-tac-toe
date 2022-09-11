@@ -1,4 +1,9 @@
 const gameMove = (event) => {
+    if (turnCounter === 1) {
+        computerIsX.disabled = true
+        computerIsO.disabled = true
+    }
+
     if (!event.target.innerText) {
 
         // fill clicked square with X or O
