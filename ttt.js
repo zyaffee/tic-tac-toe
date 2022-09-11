@@ -17,8 +17,8 @@ const gameMove = (event) => {
         turnCounter += 1
         if (turnCounter >= 10 && victory === false) {
             turnState.innerText = "Draw! Time to RESTART."
-        }
-        else if (computerPlayer) {
+        } else
+        if (turnCounter !== 1 && victory === false) {
             computerMove()
         }
     }
@@ -119,15 +119,15 @@ const checkVictory = (player) => {
 
 // RESTART button function, empty squares and reset turn counter
 const reset = () => {
-    for (i = 0; i < allSquares.length; i++) {
-        allSquares[i].innerText = ""
-    }
     turnState.innerText = 'X To Move'
     turnCounter = 1
     victory = false
     computerPlayer = ''
     computerIsX.disabled = false
     computerIsO.disabled = false
+    for (i = 0; i < allSquares.length; i++) {
+        allSquares[i].innerText = ""
+    }
 }
 
 // NECESSARY DECLARATIONS
