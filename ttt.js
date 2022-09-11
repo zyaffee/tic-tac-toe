@@ -18,7 +18,7 @@ const gameMove = (event) => {
         if (turnCounter >= 10 && victory === false) {
             turnState.innerText = "Draw! Time to RESTART."
         } else
-        if (turnCounter !== 1 && victory === false) {
+        if (computerPlayer && victory === false) {
             computerMove()
         }
     }
