@@ -126,6 +126,8 @@ const reset = () => {
     turnCounter = 1
     victory = false
     computerPlayer = ''
+    computerIsX.disabled = false
+    computerIsO.disabled = false
 }
 
 // NECESSARY DECLARATIONS
@@ -156,6 +158,8 @@ turnState.innerText = 'X To Move'
 computerIsX.addEventListener('click', () => {
     if (!computerPlayer && turnCounter === 1) {
         computerPlayer = 'X'
+        computerIsX.disabled = true
+        computerIsO.disabled = true
         computerMove()
     }
 })
@@ -163,6 +167,8 @@ computerIsX.addEventListener('click', () => {
 computerIsO.addEventListener('click', () => {
     if (!computerPlayer && turnCounter === 1) {
         computerPlayer = 'O'
+        computerIsX.disabled = true
+        computerIsO.disabled = true
     }
 })
 
