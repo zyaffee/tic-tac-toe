@@ -20,6 +20,7 @@ const gameMove = (event) => {
         } else
         if (computerPlayer && victory === false) {
             computerMove()
+            console.log("Major Weirdness")
         }
     }
 }
