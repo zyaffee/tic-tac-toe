@@ -15,10 +15,71 @@ const gameMove = (event) => {
 
         // update turn counter and check draws
         turnCounter += 1
-        if (turnCounter >= 10) {
+        if (turnCounter >= 10 && victory === false) {
             turnState.innerText = "Draw! Time to RESTART."
         }
+        else if (computerPlayer) {
+            computerMove()
+        }
     }
+}
+
+async function computerMove() {
+    // illusion of calculation
+    for (i = 0; i < allSquares.length; i++) {
+        if (!allSquares[i].innerText) {
+            allSquares[i].innerText = '...'
+        }
+    }
+    await sleep(500)
+    for (i = 0; i < allSquares.length; i++) {
+        if (allSquares[i].innerText === '...') {
+            allSquares[i].innerText = '..'
+        }
+    }
+    await sleep(500)
+    for (i = 0; i < allSquares.length; i++) {
+        if (allSquares[i].innerText === '..') {
+            allSquares[i].innerText = '.'
+        }
+    }
+    await sleep(500)
+    for (i = 0; i < allSquares.length; i++) {
+        if (allSquares[i].innerText === '.') {
+            allSquares[i].innerText = ''
+        }
+    }
+
+    // generate possible moves
+    let moves = []
+    for (i = 0; i < allSquares.length; i++) {
+        if (!allSquares[i].innerText) {
+            moves.push(i)
+        }
+    }
+
+    // fill computer square with X or O
+    if (turnCounter % 2 !== 0) {
+        allSquares[moves[Math.floor(Math.random()*moves.length)]].innerText = 'X'
+        turnState.innerText = 'O To Move'
+        checkVictory('X')
+    }
+     else {
+        allSquares[moves[Math.floor(Math.random()*moves.length)]].innerText = 'O'
+        turnState.innerText = 'X To Move'
+        checkVictory('O')
+    }
+
+    // update turn counter and check draws
+    turnCounter += 1
+    if (turnCounter >= 10 && victory === false) {
+        turnState.innerText = "Draw! Time to RESTART."
+    }
+}
+
+// JS sleep function I found on the internet
+const sleep = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 const checkVictory = (player) => {
@@ -51,6 +112,8 @@ const checkVictory = (player) => {
             oWins += 1
             scoreBoard[1].innerText = oWins
         }
+
+        victory = true
     }
 }
 
@@ -61,13 +124,19 @@ const reset = () => {
     }
     turnState.innerText = 'X To Move'
     turnCounter = 1
+    victory = false
+    computerPlayer = ''
 }
 
+// NECESSARY DECLARATIONS
 let turnCounter = 1
 
 let allSquares = document.getElementsByClassName('square')
 
 let restart = document.getElementById('restart')
+
+let computerIsX = document.getElementById('compIsX')
+let computerIsO = document.getElementById('compIsO')
 
 let turnState = document.getElementById('turnState')
 
@@ -76,9 +145,26 @@ let oWins = 0
 
 let scoreBoard = [document.getElementById('xWins'), document.getElementById('oWins')]
 
-restart.addEventListener('click', reset)
+let victory = false
 
+let computerPlayer = ''
+
+restart.addEventListener('click', reset)
 turnState.innerText = 'X To Move'
+
+// EVENT LISTENERS
+computerIsX.addEventListener('click', () => {
+    if (!computerPlayer && turnCounter === 1) {
+        computerPlayer = 'X'
+        computerMove()
+    }
+})
+
+computerIsO.addEventListener('click', () => {
+    if (!computerPlayer && turnCounter === 1) {
+        computerPlayer = 'O'
+    }
+})
 
 for (i = 0; i < allSquares.length; i++) {
     allSquares[i].addEventListener('click', gameMove)
