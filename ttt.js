@@ -38,7 +38,19 @@ const checkVictory = (player) => {
                 allSquares[i].innerText = '-'
             }
         }
+
+        // display winner
         turnState.innerText = `${player}'s Win!`
+
+        // update score
+        if (turnCounter % 2 !== 0) {
+            xWins += 1
+            scoreBoard[0].innerText = xWins
+        }
+        else {
+            oWins += 1
+            scoreBoard[1].innerText = oWins
+        }
     }
 }
 
@@ -58,6 +70,11 @@ let allSquares = document.getElementsByClassName('square')
 let restart = document.getElementById('restart')
 
 let turnState = document.getElementById('turnState')
+
+let xWins = 0
+let oWins = 0
+
+let scoreBoard = [document.getElementById('xWins'), document.getElementById('oWins')]
 
 restart.addEventListener('click', reset)
 
