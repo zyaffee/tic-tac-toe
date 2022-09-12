@@ -2,7 +2,7 @@
     display: inline-block;
     width: 256px; height: 256px;
     color: black;
-    background-color: white;
+    background-color: tan;
     font-size: 200px;
     margin: 8px;
     vertical-align: middle;
@@ -14,6 +14,11 @@ h3 {
 
 body {
     text-align: center;
-    color: white;
+    color: tan;
     background-color: black;
+    font-family: '';
+}
+
+button {
+    background-color: tan;
 }
