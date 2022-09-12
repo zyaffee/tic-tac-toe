@@ -37,19 +37,19 @@ async function computerMove() {
             allSquares[i].innerText = '...'
         }
     }
-    await sleep(500)
+    await sleep(1000 - turnCounter*90)
     for (i = 0; i < allSquares.length; i++) {
         if (allSquares[i].innerText === '...') {
             allSquares[i].innerText = '..'
         }
     }
-    await sleep(500)
+    await sleep(1000 - turnCounter*90)
     for (i = 0; i < allSquares.length; i++) {
         if (allSquares[i].innerText === '..') {
             allSquares[i].innerText = '.'
         }
     }
-    await sleep(500)
+    await sleep(1100 - turnCounter*90)
     for (i = 0; i < allSquares.length; i++) {
         if (allSquares[i].innerText === '.') {
             allSquares[i].innerText = ''
